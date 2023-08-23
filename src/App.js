@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import LoginForm from './components/LoginForm';
+import RegistrationForm from './components/RegistrationForm';
+import Navbar from './components/Navbar';
+import UserList from './components/UserList';
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+  const handleLogin = (username) => {
+    setUsername(username);
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setUsername('');
+    setLoggedIn(false);
+  };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>User Authentication SPA</h1>
+      {loggedIn ? (
+        <>
+          <Navbar username={username} handleLogout={handleLogout} />
+          <h2>Welcome to the Dashboard, {username}!</h2>
+          <UserList />
+        </>
+      ) : (
+        <>
+          <LoginForm handleLogin={handleLogin} />
+          <RegistrationForm />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
