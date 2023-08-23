@@ -24,7 +24,6 @@ const RegistrationForm = () => {
 
         try {
             // Make a POST request to your backend API for user registration
-            //console.log(process.env)
             const response = await fetch('http://127.0.0.1:5000/register', {
                 method: 'POST',
                 headers: {
